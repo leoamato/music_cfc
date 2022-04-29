@@ -15,7 +15,7 @@ This aplication is a _"song-book"_ to help musicians
 
 > $ cd src/
 
-> $git clone https://github.com/leoamato/music_cfc.git
+> $ git clone https://github.com/leoamato/music_cfc.git
 
 4. Activate the virtual environment doing...
 
