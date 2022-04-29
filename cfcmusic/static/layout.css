@@ -1,0 +1,63 @@
+a {
+    background-color: rgb(350, 90, 0);
+    color: black;
+    padding: 10px 10px;
+    margin: 30px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+}
+
+.input_button {
+    background-color:rgb(188, 180, 179);
+    color: black;
+    padding: 10px 10px;
+    border-style:hidden;
+    text-align: center;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+}
+
+h1 {
+    background-color: black;
+    text-align: center;
+    color: rgb(350, 90, 0);
+    margin-left: 12cm;
+    margin-right: 12cm;
+    padding: 0.3cm;
+}
+
+body {
+    background-color:black;
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y:top;
+    background-size: 35cm;
+}
+
+div {
+    background-color: black;
+    text-align: center;
+    padding: 0.5cm;
+}
+
+p {
+    color:white;
+}
+
+th, td {
+    color:white;
+    width: 5cm;
+}
+
+label {
+    color: white;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}

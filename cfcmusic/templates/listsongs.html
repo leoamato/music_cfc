@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Músicos CFC | Canciones</title>
+        <meta charset="utf-8">
+        <link rel="icon" href="{% static 'logo.ico' %}">
+        <link rel="stylesheet" href="{% static 'layout.css' %}">
+
+        <style>
+            th, td {
+                border-style: solid;
+                border-color: grey;
+            }
+
+            a {
+                background-color:transparent;
+                color: white;
+                font-family:unset;
+            }
+
+            #goBack {
+                background-color: rgb(350, 90, 0);
+                color: black;
+                padding: 10px 10px;
+                text-align: center;
+                text-decoration: none;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-weight: bolder;
+            }
+            </style>
+    </head>
+    
+    <body>
+        <h1> Listado de canciones </h1>
+        <div id="filters">
+            <form method="POST" style="margin-right: auto; margin-left: auto;" autocomplete="off">
+                <table>
+                    {% csrf_token %}
+                    <tr>
+                        <td style="border-style: none;">
+                            <label for="artistfilter"> Filtrar por Artista</label>
+                            <input type="text" name="artistfilter" autocomplete="off" placeholder="Ingresá un Nombre">
+                        </td>
+
+                        <td style="border-style: none;">
+                            <label for="categoryfilter"> Filtrar por Categoría</label>
+                            <select name="categoryfilter">
+                                <option>.....</option>
+                                {% for category in categories %}
+                                <option> {{category.name}} </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td style="border-style: none;">
+                            <input class="input_button" type="submit" value="Filtrar">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div id="content">
+            <table style="border-style: solid;">
+                <tr>
+                    <th > Nombre </th>
+                    <th> Artista </th>
+                    <th> Tono </th>
+                    <th> Bpm </th>
+                    <th> ¿Tenemos secuencia?</th>
+                    <th> Categoría </th>
+                    <th> Link YouTube </th>
+                    <th> Link de secuencia </th>
+                </tr>
+                {% for song in database %}
+                <tr>
+                    <td> {{song.name}} </td>
+                    <td> {{song.author}} </td>
+                    <td> {{song.key}} </td>
+                    <td> {{song.bpm}} </td>
+                    {% if song.have_track == True %}
+                        <td> Si </td>
+                    {% else %} 
+                        <td> No </td>
+                    {% endif %}
+                    <td> {{song.category__name}} </td>
+                    <td>
+                        <a href="{{song.ytlink}}" target="_blank"> Escuchar </a>
+                    </td>
+                    {% if song.tracklink == None %}
+                    <td> </td>
+                    {% else %}
+                    <td> <a href="{{song.tracklink}}" target="_blank"> Multitrack </a> </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div id="messages" >
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color:rgb(350, 90, 0); font-size: 20px;"> {{message}} </p> <br>
+                {% endfor %}
+            {% endif %} 
+        </div>
+
+        <div style="text-align: center;">
+            <a id="goBack" href="/">
+                Volver
+            </a>
+        </div>
+    </body>
+</html>

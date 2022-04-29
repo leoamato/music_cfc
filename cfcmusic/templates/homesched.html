@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Músicos CFC | Cronogramas </title>
+        <meta charset="utf-8">
+        <link rel="icon" href="{% static 'logo.ico' %}">
+        <link rel="stylesheet" href="{% static 'layout.css' %}">
+
+        <style>
+            a {
+                object-position: center;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <h1> Cronogramas </h1>
+        
+        <div id="links">
+            <br>
+            <table>
+                <tr>
+                    <td>
+                        <a href="https://drive.google.com/file/d/1U1ONpe4ihQQK650DWJ0GpssS3u3AFMYg/view?usp=sharing" target="_blank"> Enero {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://drive.google.com/file/d/1vElIpciJFzOdo_a7KKLxVOgNfoStVtHw/view?usp=sharing" target="_blank"> Febrero {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://drive.google.com/file/d/1gHI4CxP0SLgkhVo_QNmTYLrHrHoxCduW/view?usp=sharing" target="_blank"> Marzo {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://drive.google.com/file/d/1I6NdUQP2BzP_Gd6hJy10kQC6ZJQJxCEY/view?usp=sharing" target="_blank"> Abril {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://drive.google.com/file/d/1OXUMVh7x1wcJC2Zr4jT3N1ERkcTed4WG/view?usp=sharing" target="_blank"> Mayo {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="" target="_blank"> Junio {{year}} </a>
+                    </td>
+                </tr>
+            </table>
+            
+            <br> <br>
+            
+            <table>
+                <tr>
+                    <td>
+                        <a href="" target="_blank"> Julio {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="" target="_blank"> Agosto {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="" target="_blank"> Septiembre {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="" target="_blank"> Octubre {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="" target="_blank"> Noviembre {{year}} </a>
+                    </td>
+                    
+                    <td>
+                        <a href="" target="_blank"> Diciembre {{year}} </a>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+
+        <h1> Calendario </h1>
+
+        <div id="render-calendar" style="margin-right: 13cm; margin-left: 13cm;">
+            {{calendar | safe}}
+            <p> -------------------- </p>
+            <a href="/"> Volver </a>
+        </div>
+    </body>
+</html>

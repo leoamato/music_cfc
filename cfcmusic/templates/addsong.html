@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Músicos CFC | Canciones</title>
+        <meta charset="utf-8">
+        <link rel="icon" href="{% static 'logo.ico' %}">
+        <link rel="stylesheet" href="{% static 'layout.css' %}">
+    </head>
+
+    <body>
+        <h1>
+            Agregar canción
+        </h1>
+        <div id="content" style="margin-left: 12cm;margin-right: 12cm;">
+            <form method="POST" style="margin-right: auto; margin-left: auto;" autocomplete="off">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <label for="name">Nombre de la canción</label><br>
+                            <input style="margin-bottom: 10px;" type="text" id="name" name="name" required><br>
+                        </td>
+                        <td>
+                            <label for="author">Artista</label><br>
+                            <input style="margin-bottom: 10px;" type="text" id="author" name="author" required><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="key">Tono</label><br>
+                            <select style="margin-bottom: 15px;" id="key" name="key"><br>
+                                <option value="C">C</option>
+                                <option value="Cm">Cm</option>
+                                <option value="C">C#</option>
+                                <option value="C">C#m</option>
+                                <option value="C">D</option>
+                                <option value="C">Dm</option>
+                                <option value="C">D#</option>
+                                <option value="C">D#m</option>
+                                <option value="C">E</option>
+                                <option value="C">Em</option>
+                                <option value="C">F</option>
+                                <option value="C">Fm</option>
+                                <option value="C">F#</option>
+                                <option value="C">F#m</option>
+                                <option value="C">G</option>
+                                <option value="C">Gm</option>
+                                <option value="C">G#</option>
+                                <option value="C">G#m</option>
+                                <option value="C">A</option>
+                                <option value="C">Am</option>
+                                <option value="C">A#</option>
+                                <option value="C">A#m</option>
+                                <option value="C">B</option>
+                                <option value="C">Bm</option>
+
+                            </select>
+                        </td>
+                        <td>
+                            <label for="bpm">Velocidad (bpm)</label><br>
+                            <input style="margin-bottom: 10px;" type="number" id="bpm" name="bpm" required><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="tracklink">Link de la secuencia</label><br>
+                            <input style="margin-bottom: 10px;" type="url" id="tracklink" name="tracklink"><br>
+                        </td>
+                        <td>
+                            <label for="ytlink">Link de YouTube</label><br>
+                            <input style="margin-bottom: 10px;" type="url" id="ytlink" name="ytlink" required><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="have_track">¿Tenemos secuencia?</label><br>
+                            <select style="margin-bottom: 15px;" id="have_track" name="have_track" required><br>
+                                <option>Si</option>
+                                <option>No</option>
+                                <br>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="category">Categoría o tema</label><br>
+                            <select style="margin-bottom: 15px;" id="category" name="category" multiple><br>
+                                {% for category in categories %}
+                                    <option value={{category.id}}>{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <a href="/songs">Volver</a>
+                <a href="/songs/add_category">Agregar Categoría</a>
+                <input style="margin-left: 15px;" class="input_button" type="submit" value="Agregar">
+            </form>
+
+            <div id="messages" >
+                {% if messages %}
+                {% for message in messages %}
+                <p style="color:rgb(350, 90, 0); font-size: 20px;"> {{message}} </p> <br>
+                {% endfor %}
+                {% endif %} 
+            </div>
+        </div>
+    </body>
+</html>
