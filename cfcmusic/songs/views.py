@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Template, Context
 from django.contrib import messages
-from songs.models import Song, Categories
+from songs.models import Song, Categories, SongCategory
 from songs import forms
 from django.views.decorators.csrf import csrf_exempt
 from cfcmusic.settings import BASE_DIR
@@ -21,9 +21,10 @@ def songs_home (request):
 @csrf_exempt
 def song_list (request):
     form = forms.SongForm()
-    song_list = Song.objects.values('id', 'name', 'author', 'key', 'ytlink', 'bpm', 'category__name', 'have_track', 'tracklink')
+    song_list = Song.objects.values('id', 'name', 'author', 'key', 'ytlink', 'bpm', 'have_track', 'tracklink')
     categories = Categories.objects.all()
 
+    print(song_list)
     if (request.method == 'POST'):
         filter_artist = request.POST['artistfilter']
         filter_category = request.POST['categoryfilter']
@@ -50,7 +51,6 @@ def song_list (request):
 @csrf_exempt
 def song_add (request):
     form = forms.SongForm()
-    categories = Categories.objects.all()
 
     if (request.method == 'POST'):
         print(request.POST)
@@ -63,7 +63,7 @@ def song_add (request):
             yt_link = form.cleaned_data['ytlink']
             track_link = form.cleaned_data['tracklink']
             have_track = form.cleaned_data['have_track']
-            categories = form.cleaned_data['category']
+            categories = request.POST.getlist('category')
 
             already_load = Song.objects.filter(name=song_name, author=song_author, ytlink=yt_link, key=song_key).exists()
 
@@ -71,6 +71,10 @@ def song_add (request):
                 song = Song(name=song_name, author=song_author, 
                 key=song_key, ytlink=yt_link, bpm=song_bpm, have_track=have_track, tracklink=track_link)
                 song.save()
+                for category in categories:
+                    cat = Categories.objects.get(id=category)
+                    song_cat = SongCategory(category=cat, song=song)
+                    song_cat.save()
 
                 messages.success(request, f"¡Canción agregada correctamente!")
             else:
@@ -79,6 +83,7 @@ def song_add (request):
             print (form.errors)
             messages.error(request, f"¡Los datos ingresados no son correctos!")
 
+    categories = Categories.objects.all()
     return render (request, 'addsong.html', {'form': form, 'categories':categories})
 
 @csrf_exempt

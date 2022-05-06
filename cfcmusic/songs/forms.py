@@ -12,8 +12,7 @@ class SongForm (ModelForm):
             'ytlink',
             'bpm',
             'have_track',
-            'tracklink',
-            'category'
+            'tracklink'
         ]
 
 class CategoriesForm (ModelForm):

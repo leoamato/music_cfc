@@ -8,7 +8,7 @@ class Categories(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
   
     def __str__(self):
-        return self.title
+        return self.name
 
 class Song (models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -17,9 +17,16 @@ class Song (models.Model):
     key = models.CharField(max_length= 5, null=False, blank=False)
     ytlink = models.CharField(max_length= 100, null=False, blank=False)
     bpm = models.IntegerField()
-    category = models.ManyToManyField(Categories, blank=False)
     have_track = models.BooleanField()
     tracklink = models.CharField(max_length= 100, null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+class SongCategory(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=False)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, null=False)
+
+    def __str__(self):
+        return self.id
