@@ -21,10 +21,19 @@ def songs_home (request):
 @csrf_exempt
 def song_list (request):
     form = forms.SongForm()
-    song_list = Song.objects.values('id', 'name', 'author', 'key', 'ytlink', 'bpm', 'have_track', 'tracklink')
+    song_list = list(Song.objects.values('id', 'name', 'author', 'key', 'ytlink', 'bpm', 'have_track', 'tracklink'))
+    song_cat = SongCategory.objects.values('category__name', 'song')
     categories = Categories.objects.all()
 
-    print(song_list)
+    for song in song_list:
+        cats = []
+        for category in song_cat:
+            if (category['song'] == song['id']):
+                cats.append(category['category__name'])
+        song['categories'] = cats
+
+    print(song_list[0])
+    
     if (request.method == 'POST'):
         filter_artist = request.POST['artistfilter']
         filter_category = request.POST['categoryfilter']

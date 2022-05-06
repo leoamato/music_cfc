@@ -31,6 +31,7 @@ h1 {
 
 body {
     background-color:black;
+    opacity: 1.0;
     background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-position-x: center;

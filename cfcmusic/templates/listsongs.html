@@ -85,7 +85,14 @@
                     {% else %} 
                         <td> No </td>
                     {% endif %}
-                    <td> {{song.category__name}} </td>
+                    <td>
+                        <ul>
+                            {% for cat in song.categories %}
+                                <li>{{cat}}</li>
+                            {% endfor %}
+
+                        </ul>
+                    </td>
                     <td>
                         <a href="{{song.ytlink}}" target="_blank"> Escuchar </a>
                     </td>
